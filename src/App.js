@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import MainApp from "./app/index"
+import MainApp from "./app/index";
+
+//Employee CRUD
 import Dashboard from "./app/routes/Dashboard";
+import NewEmployee from "./app/routes/Create";
+import ViewEmployee from "./app/routes/View";
+import EditEmployee from "./app/routes/Edit";
+
+
 import Preferences from "./app/routes/Preferences";
 import NoContentView from "./app/routes/Errors/NoContent";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import {
-  BrowserRouter,
-  Route,
-  Routes as Switch,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
 
 function App(props) {
-
   return (
     <div className="App">
       <div className="wrapper">
@@ -21,17 +23,13 @@ function App(props) {
           <Switch>
             <Route exact path="login" element={<Login />} />
             <Route exact path="signup" element={<Signup />} />
-            <Route path="app" element={<MainApp />} >
-              <Route
-                path="dashboard"
-                element={<Dashboard />}
-              />
-              <Route
-                path="preferences"
-                element={<Preferences />}
-              />
+            <Route path="employees" element={<MainApp />}>
+              <Route index element={<Dashboard />} />
+              <Route exact path="create" element={<NewEmployee />} />
+              <Route exact path=":id" element={<ViewEmployee />} />
+              <Route exact path=":id/edit" element={<EditEmployee />} />
             </Route>
-              <Route path="*" element={<NoContentView />} />
+            <Route path="*" element={<NoContentView />} />
           </Switch>
         </BrowserRouter>
       </div>
